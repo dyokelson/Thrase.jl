@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Erickson"
+  given-names: "Brittany"
+title: "Thrase"
+version: 0.1.0
+doi: todo
+date-released: 2020-12-18
+url: "https://github.com/Thrase/Thrase.jl"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Erickson"
+    given-names: "Brittany"
+  doi: 10.1007/s10915-022-01961-1
+  journal: "Journal of Scientific Computing"
+  month: 8
+  title: "A non-stiff summation-by-parts finite difference method for the wave equation in second order form: Characteristic boundary conditions and nonlinear interfaces"
+  year: 2022
