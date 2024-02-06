@@ -8,13 +8,37 @@ using OrdinaryDiffEq
 using DiffEqCallbacks
 using DelimitedFiles
 
+# TODO: Description of this function - move to utils? the name is exported there
+function find_station_index(stations, grid_points)
+    numstations = length(stations)
+    station_ind = zeros(numstations)
+    for i in range(1, stop=numstations)
+      station_ind[i] = argmin(abs.(grid_points .- stations[i]))
+      station_ind[i]
+    end
+    return Integer.(station_ind)
+end
+
+
+# Uses the plotting functions in src/utils.jl
+function generate_example_plots(pth)
+
+    # example of how to plot slip contours:
+    plot_slip(pth*"slip.dat")
+
+    # examples of how ot plot times series of shear stress:
+    plot_fault_time_series("slip", pth*"fltst_strk000.txt")
+    plot_fault_time_series("V", pth*"fltst_strk+10.txt")
+    plot_fault_time_series("shear_stress", pth*"fltst_strk+10.txt")
+    plot_fault_time_series("state", pth*"fltst_strk+25.txt")
+end
 
 
 function main()
 
 
     ### input parameters
-    (pth, stride_space, stride_time, xc, zc, Nx, Nz,
+    (pth, generate_plots, stride_space, stride_time, xc, zc, Nx, Nz,
     sim_years, Vp, ρ, cs, σn, RSamin, RSamax, RSb, RSDc,
     RSf0, RSV0, RSVinit, RSH1,RSH2, RSWf, SBPp) = read_params(localARGS[1])
 
@@ -30,7 +54,7 @@ function main()
     η = μshear / (2 * cs)
 
    
-
+    # set up computational domain
     x = Array(LinRange(xc[1], xc[2], Nx+1))  
     z = Array(LinRange(zc[1], zc[2], Nz+1))
 
@@ -88,16 +112,6 @@ function main()
     stations = [0, 2.5, 5, 7.5, 10, 12.5, 15, 17.5, 20, 25, 30, 35] # km
 
     # Next part of code related to code output
-    function find_station_index(stations, grid_points)
-        numstations = length(stations)
-        station_ind = zeros(numstations)
-        for i in range(1, stop=numstations)
-          station_ind[i] = argmin(abs.(grid_points .- stations[i]))
-          station_ind[i]
-        end
-        return Integer.(station_ind)
-      end
-      
     station_indices = find_station_index(stations, z)
     station_strings = ["000", "025", "005", "075", "100", "125", "150", "175", "200", "250", "300", "350"] # "125" corresponds to 12.5 km down dip. 
   
@@ -149,7 +163,11 @@ function main()
              abstol = 1e-5, reltol = 1e-5, save_everystep=true, gamma = 0.2,
              internalnorm=(x, _)->norm(x, Inf), callback=cb_fun)
 
-    
+    # If the generate_plots parameter is "true" make example plots
+    if generate_plots
+        generate_example_plots(pth)
+    end
+
     return (sol, z, δNp, pth)
 end
 
@@ -159,12 +177,3 @@ end
 
 
 
-
-# example of how to plot slip contours (uncomment if desired):
-# plot_slip(pth*"slip.dat")
-
-# examples of how ot plot times series of shear stress:
-# plot_fault_time_series("slip", pth*"fltst_strk000.txt")
-# plot_fault_time_series("V", pth*"fltst_strk+10.txt")
-# plot_fault_time_series("shear_stress", pth*"fltst_strk+10.txt")
-# plot_fault_time_series("state", pth*"fltst_strk+25.txt")

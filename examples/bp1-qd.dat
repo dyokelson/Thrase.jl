@@ -5,6 +5,8 @@
 # details of output data:
 # path to directory that stores output data
 pth = ./output/
+# boolean value whether we want to generate example plots or not
+generate_plots = false
 # write-out every "stride_space" grid points along fault
 stride_space = 1 
 # write-out every "stride_time" time steps
