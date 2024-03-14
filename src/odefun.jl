@@ -7,7 +7,15 @@ using Printf
 
 using DelimitedFiles
 
+"""
+    odefun(dψV, ψδ, p, t)
 
+Set up the Ordinary Differential Equation to solve for next timestep values of dψ and V
+
+# Examples
+```julia-repl
+```
+"""
 function odefun(dψV, ψδ, p, t)
   
   Vp = p.Vp
