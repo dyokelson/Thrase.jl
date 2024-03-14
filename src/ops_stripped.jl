@@ -3,6 +3,16 @@ include("diagonal_sbp.jl")
 
 using LinearAlgebra
 
+"""
+    get_operators(p, Nx, Nz, μ; xc = (-1, 1), zc = (-1, 1))
+
+
+TODO this does something
+
+# Examples
+```julia-repl
+```
+"""
 function get_operators(p, Nx, Nz, μ; xc = (-1, 1), zc = (-1, 1))
 
   
@@ -160,6 +170,16 @@ function get_operators(p, Nx, Nz, μ; xc = (-1, 1), zc = (-1, 1))
   return (M̃ , F, τ, H̃, HfI_FT)
 end
 
+"""
+    bdry_vec_mod!(g, F, τ, x, z, bc_Dirichlet, bc_Neumann, Lx, Lz)
+
+
+TODO this does something
+
+# Examples
+```julia-repl
+```
+"""
 function bdry_vec_mod!(g, F, τ, x, z, bc_Dirichlet, bc_Neumann, Lx, Lz)
 
     
@@ -186,6 +206,16 @@ function bdry_vec_mod!(g, F, τ, x, z, bc_Dirichlet, bc_Neumann, Lx, Lz)
 
 end
 
+"""
+    computetraction_stripped(HfI_FT, τ, lf, u, δ)
+
+
+TODO this does something
+
+# Examples
+```julia-repl
+```
+"""
 function computetraction_stripped(HfI_FT, τ, lf, u, δ)
     HfI_FT = HfI_FT[lf]
     τf = τ[lf]
@@ -193,7 +223,16 @@ function computetraction_stripped(HfI_FT, τ, lf, u, δ)
     return (HfI_FT * u + τf * (δ .- δ / 2)) 
   end
   
+"""
+    function rateandstate(V, psi, σn, ϕ, η, a, V0)
 
+
+TODO this does something
+
+# Examples
+```julia-repl
+```
+"""
   function rateandstate(V, psi, σn, ϕ, η, a, V0)
     Y = (1 ./ (2 .* V0)) .* exp.(psi ./ a)
     f = a .* asinh.(V .* Y)
@@ -203,7 +242,18 @@ function computetraction_stripped(HfI_FT, τ, lf, u, δ)
     dgdV = σn .* dfdV + η
     (g, dgdV)
   end
-  
+
+"""
+    newtbndv(func, xL, xR, x; ftol = 1e-6, maxiter = 500, minchange=0,
+                    atolx = 1e-4, rtolx = 1e-4)
+
+
+TODO this does something
+
+# Examples
+```julia-repl
+```
+"""
   function newtbndv(func, xL, xR, x; ftol = 1e-6, maxiter = 500, minchange=0,
                     atolx = 1e-4, rtolx = 1e-4)
     (fL, _) = func(xL)
