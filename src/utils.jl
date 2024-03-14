@@ -3,7 +3,17 @@ using SparseArrays
 using LinearAlgebra
 using DelimitedFiles
 using DifferentialEquations
-      
+
+"""
+    create_text_files(pth, flt_loc, flt_loc_indices, stations, station_strings, station_indices, t, RSVinit, δ, τz0, θ)
+
+
+TODO this does something
+
+# Examples
+```julia-repl
+```
+"""
 function create_text_files(pth, flt_loc, flt_loc_indices, stations, station_strings, station_indices, t, RSVinit, δ, τz0, θ)
 
 
@@ -56,6 +66,16 @@ function create_text_files(pth, flt_loc, flt_loc_indices, stations, station_stri
 
 end
 
+"""
+    write_to_file(pth, ψδ, t, i, zf, flt_loc, flt_loc_indices, station_strings, station_indices, p, base_name="", tdump=100)
+
+
+TODO this does something
+
+# Examples
+```julia-repl
+```
+"""
 function write_to_file(pth, ψδ, t, i, zf, flt_loc, flt_loc_indices, station_strings, station_indices, p, base_name="", tdump=100)
   
   path_to_slip = pth * "slip.dat"
@@ -110,7 +130,16 @@ end
 
 
 
+"""
+    function interp1(xpt, ypt, x)
 
+
+TODO this does something
+
+# Examples
+```julia-repl
+```
+"""
 function interp1(xpt, ypt, x)
 
       knots = (xpt,) 
@@ -118,10 +147,16 @@ function interp1(xpt, ypt, x)
       itp[x]  # endpoints of x must be between xpt[1] and xpt[end]
 end
 
+"""
+      find_ind(mv)
 
-# find_ind() differentiates b/t phases by defining
-# interseismic when max slip rate < 10^-3 m/s
-# mv is maximum slip rate (log10 m/s) 
+Differentiates between phases by defining interseismic when max slip rate < 10^-3 m/s
+mv is the maximum slip rate (log10 m/s) 
+
+# Examples
+```julia-repl
+```
+"""
 function find_ind(mv)
   ind = [1]
   int = 1
@@ -146,8 +181,15 @@ function find_ind(mv)
   return ind
 end
 
-# plot_slip will plot slip contours from devol.txt - every 5 years in blue during interseismic, 
-# every 1 second in red during coseismic
+"""
+      plot_slip(filename)
+
+Plot slip contours from devol.txt - every 5 years in blue during interseismic, and every 1 second in red during coseismic
+
+# Examples
+```julia-repl
+```
+"""
 function plot_slip(filename)
 
   grid = readdlm(filename, Float64)
@@ -219,7 +261,15 @@ function plot_slip(filename)
       ylabel!("Depth (km)")
 end
 
+"""
+      plot_global(field, filename)
 
+Plot...
+
+# Examples
+```julia-repl
+```
+"""
 function plot_global(field, filename)
 
   @show filename
@@ -245,9 +295,16 @@ function plot_global(field, filename)
 end
 
 
+"""
+      plot_fault_time_series(field, filename)
 
-# plot_fault_time_series will plot field "field" from "filename".
-# "field" has to be one of "slip", "V", "shear_stress", "state"
+Plot field "field" from 'filename'.
+'field' has to be one of 'slip', 'V', 'shear_stress', 'state'
+
+# Examples
+```julia-repl
+```
+"""
 function plot_fault_time_series(field, filename)
 
   @show filename
@@ -283,7 +340,16 @@ function plot_fault_time_series(field, filename)
     #return nothing
 end
 
-# Function for reading in numerical parameters for basin simulations
+"""
+      read_params(f_name)
+
+Reads in numerical parameters for basin simulations
+'f_name' is the input file
+
+# Examples
+```julia-repl
+```
+"""
 function read_params(f_name)
   f = open(f_name, "r")
   tmp_params = []
