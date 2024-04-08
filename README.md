@@ -7,7 +7,7 @@
 
 # About
 
-Thrase is a GPU-enabled, high-order accurate SBP-SAT finite difference code on unstructured meshes for SEAS (Sequences of Earthquakes and Aseismic Slip) problems written entirely in Julia.  
+Thrase is a GPU-enabled, high-order accurate SBP-SAT finite difference code on unstructured meshes for SEAS (Sequences of Earthquakes and Aseismic Slip) problems written entirely in Julia. More details can be found in the <a href="https://thrase.github.io/Thrase.jl/dev/">documentation</a>.
 
 # Features:
 - high-order accurate finite difference spatial discretizations featuring provably stability
@@ -62,9 +62,7 @@ localARGS = ["examples/bp1-qd.dat"]
 include("examples/stripped_qd_driver.jl");
 ```
 Note that the parameters set in the input file "examples/bp1-qd.dat" are slightly modified from the benchmark description to allow for fast simulation on most personal computers. The driver file calls a stripped down version of the code (for training purposes).
- 
-# Documentation: 
-<a href="https://thrase.github.io/Thrase.jl/dev/"> More to come soon...
+
 
 # How to cite: 
 - Erickson, B. A., Kozdon, J. E., and Harvey, T. (2022), <a href="https://link.springer.com/article/10.1007/s10915-022-01961-1">A non-stiff summation-by-parts finite difference method for the wave equation in second order form: Characteristic boundary conditions and nonlinear interfaces</a>, Journal of Scientific Computing, doi: 10.1007/s10915-022-01961-1. 
