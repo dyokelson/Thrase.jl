@@ -2,6 +2,8 @@ using Thrase
 using Test
 using Printf
 
+include("Aqua.jl")
+
 @testset "Thrase.jl" begin
    try
       localARGS = ["examples/test.dat"]
